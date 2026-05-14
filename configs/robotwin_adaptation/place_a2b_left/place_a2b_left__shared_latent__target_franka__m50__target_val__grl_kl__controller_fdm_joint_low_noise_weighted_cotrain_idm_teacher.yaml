@@ -1,0 +1,40 @@
+_base_: place_a2b_left__shared_latent__target_franka__m50__target_val__grl_kl.yaml
+
+controller_joint_finetune:
+  enabled: true
+  controller_ckpt: ""
+  run_dir: null
+  ckpt: null
+  output_dir: ""
+  train_split: train
+  eval_split: eval
+  right_target_split: right_target_eval
+  train_dataset_filter: franka
+  eval_dataset_filter: franka
+  right_target_dataset_filter: franka
+  context_len: 17
+  batch_size: 2
+  eval_batch_size: 4
+  train_steps: 2000
+  accumulate_grad_batches: 4
+  log_every: 10
+  eval_every: 100
+  save_every: 5000
+  save_video_count: 1
+  save_video_fps: 20
+  controller_lr: 5.0e-5
+  controller_weight_decay: 1.0e-4
+  lvp_lr: 2.5e-6
+  clip_grad_norm: 1.0
+  latent_anchor_weight: 0.05
+  low_noise_only: false
+  low_noise_weighted: true
+  low_noise_sigma_hi: 0.4
+  low_noise_weight_floor: 0.5
+  lvp_train_modules: [model, action_encoder]
+  use_lr_scheduler: true
+  seed: 0
+  wandb: true
+
+wandb:
+  name: robotwin_place_a2b_left_shared_latent_target_franka_m50_target_val_grl_kl_controller_fdm_joint_low_noise_weighted_cotrain_idm_teacher

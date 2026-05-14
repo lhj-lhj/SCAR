@@ -1,0 +1,152 @@
+# ============================================================================
+# Auto-generated Robotwin adaptation config
+# source_manifest: data/datasets/robotwin_lmdb/manifests/robotwin_place_a2b_left_randomized_500_adaptation_split_seed0.json
+# method: target_only_gt
+# target_embodiment: franka
+# target_train_episodes: 10
+# eval_split: target_val
+# train_datasets: 1
+# eval_datasets: 1
+# right_target_eval_datasets: 1
+# ============================================================================
+_base_: ../../robotwin_baseline.yaml
+data:
+  dataset_paths:
+  - data/datasets/robotwin_lmdb/robotwin_place_a2b_left_franka_randomized_500
+  dataset_episode_subsets:
+    data/datasets/robotwin_lmdb/robotwin_place_a2b_left_franka_randomized_500:
+    - 170
+    - 296
+    - 312
+    - 81
+    - 297
+    - 310
+    - 91
+    - 164
+    - 437
+    - 277
+  eval_dataset_paths:
+  - data/datasets/robotwin_lmdb/robotwin_place_a2b_left_franka_randomized_500
+  eval_dataset_episode_subsets:
+    data/datasets/robotwin_lmdb/robotwin_place_a2b_left_franka_randomized_500:
+    - 247
+    - 149
+    - 23
+    - 144
+    - 453
+    - 367
+    - 398
+    - 94
+    - 176
+    - 355
+    - 348
+    - 259
+    - 57
+    - 407
+    - 27
+    - 354
+    - 43
+    - 408
+    - 494
+    - 278
+    - 462
+    - 12
+    - 281
+    - 463
+    - 282
+    - 202
+    - 468
+    - 320
+    - 331
+    - 54
+    - 306
+    - 387
+    - 19
+    - 2
+    - 39
+    - 26
+    - 477
+    - 87
+    - 382
+    - 441
+    - 456
+    - 129
+    - 72
+    - 409
+    - 471
+    - 397
+    - 438
+    - 334
+    - 295
+    - 99
+  right_target_eval_dataset_paths:
+  - data/datasets/robotwin_lmdb/robotwin_place_a2b_right_franka_randomized_500
+  right_target_eval_dataset_episode_subsets:
+    data/datasets/robotwin_lmdb/robotwin_place_a2b_right_franka_randomized_500:
+    - 20
+    - 37
+    - 48
+    - 50
+    - 51
+    - 71
+    - 75
+    - 111
+    - 128
+    - 132
+    - 144
+    - 155
+    - 158
+    - 169
+    - 181
+    - 183
+    - 197
+    - 207
+    - 215
+    - 222
+    - 241
+    - 244
+    - 248
+    - 258
+    - 261
+    - 272
+    - 286
+    - 298
+    - 308
+    - 316
+    - 350
+    - 361
+    - 373
+    - 386
+    - 388
+    - 401
+    - 409
+    - 414
+    - 424
+    - 432
+    - 435
+    - 455
+    - 456
+    - 460
+    - 461
+    - 464
+    - 465
+    - 470
+    - 494
+    - 495
+  cross_cycle_datasets: []
+model:
+  lvp_action_source: gt
+cycle:
+  enabled: false
+cross_cycle:
+  train_enabled: false
+  eval_enabled: false
+grl:
+  enabled: false
+  weight: 0.0
+wrong_z:
+  enabled: false
+gt_action_probe:
+  enabled: false
+wandb:
+  name: robotwin_place_a2b_left_target_only_gt_target_franka_m10_target_val

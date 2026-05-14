@@ -1,0 +1,15 @@
+_base_: place_a2b_left__shared_latent__target_franka__m10__target_val__grl_kl.yaml
+
+lvp:
+  patch:
+    algorithm:
+      model:
+        load_pretrained_weights: false
+
+train:
+  output_dir: ""
+
+resume_from: null
+
+wandb:
+  name: robotwin_place_a2b_left_shared_latent_target_franka_m10_target_val_grl_kl_fdm_no_pretrain

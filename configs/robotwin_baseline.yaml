@@ -1,0 +1,24 @@
+# ============================================================================
+# RoboTwin Baseline: IDM + LVP prior loss only (no cycle, no cross-cycle, no GRL)
+# ============================================================================
+_base_: default.yaml
+
+data:
+  dataset_paths:
+    - data/datasets/robotwin_lmdb/franka_stack_red_on_green
+    - data/datasets/robotwin_lmdb/aloha_stack_green_on_red
+
+cycle:
+  enabled: false
+
+cross_cycle:
+  train_enabled: false
+  eval_enabled: false
+
+grl:
+  enabled: false
+
+wrong_z:
+  enabled: false
+  weight: 1.0
+  warmup_steps: 0

@@ -1,0 +1,122 @@
+load: null
+dataset:
+  load_prompt_embed: true
+  load_video_latent: false
+  height: 128
+  width: 128
+algorithm:
+  debug: false
+  lr: 1.0e-05
+  betas:
+  - 0.9
+  - 0.95
+  weight_decay: 0.05
+  lr_scheduler:
+    name: constant_with_warmup
+    num_warmup_steps: 1000
+  load_video_latent: false
+  load_prompt_embed: true
+  diffusion_forcing:
+    enabled: true
+    mode: rand_history
+    clean_hist_prob: 0.5
+    cond_mode: seq
+  n_frames: 49
+  height: 128
+  width: 128
+  num_train_timesteps: 1000
+  diffusion_type: continuous
+  sample_solver: unipc
+  sample_steps: 40
+  sample_shift: 3.0
+  lang_guidance: 0.0
+  neg_prompt: ''
+  hist_guidance: 0.0
+  sliding_hist: 1
+  gradient_checkpointing_rate: 1.0
+  max_text_tokens: 512
+  logging:
+    loss_freq: 1
+    video_freq: 1000
+    video_type: single
+    fps: 20
+    n_metrics_frames: null
+    metrics:
+    - mse
+    - psnr
+    - ssim
+    metrics_batch_size: 16
+  serving:
+    port: 6688
+  text_encoder:
+    text_len: 512
+    text_dim: 4096
+    compile: true
+    name: google/umt5-xxl
+    ckpt_path: data/ckpts/Wan2.1-T2V-1.3B/models_t5_umt5-xxl-enc-bf16.pth
+  vae:
+    ckpt_path: data/ckpts/Wan2.1-T2V-1.3B/Wan2.1_VAE.pth
+    compile: true
+    z_dim: 16
+    stride:
+    - 4
+    - 8
+    - 8
+    mean:
+    - -0.7571
+    - -0.7089
+    - -0.9113
+    - 0.1075
+    - -0.1745
+    - 0.9653
+    - -0.1517
+    - 1.5508
+    - 0.4134
+    - -0.0715
+    - 0.5517
+    - -0.3632
+    - -0.1922
+    - -0.9497
+    - 0.2503
+    - -0.2921
+    std:
+    - 2.8184
+    - 1.4541
+    - 2.3275
+    - 2.6558
+    - 1.2196
+    - 1.7708
+    - 2.6052
+    - 2.0743
+    - 3.2687
+    - 2.1526
+    - 2.8652
+    - 1.5579
+    - 1.6382
+    - 1.1253
+    - 2.8251
+    - 1.916
+  model:
+    ckpt_path: data/ckpts/Wan2.1-T2V-1.3B
+    tuned_ckpt_path: null
+    load_pretrained_weights: true
+    compile: false
+    model_type: t2v
+    patch_size:
+    - 1
+    - 2
+    - 2
+    in_dim: 16
+    dim: 128
+    ffn_dim: 128
+    freq_dim: 256
+    out_dim: 16
+    num_heads: 4
+    num_layers: 2
+    window_size:
+    - -1
+    - -1
+    qk_norm: true
+    cross_attn_norm: true
+    eps: 1.0e-06
+  hist_len: 17

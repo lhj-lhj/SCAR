@@ -1,0 +1,161 @@
+# ============================================================================
+# SCAR Training - Default Configuration
+# ============================================================================
+# Usage:
+#   python scripts/train_scar.py --config configs/default.yaml
+# ============================================================================
+
+# ---- Paths ----
+paths:
+  root: null                     # null -> use the SCAR repository root
+                                 # non-absolute runtime paths default to this root
+
+# ---- Data ----
+data:
+  dataset_paths: []               # LMDB dataset paths (typically relative to paths.root; required)
+  eval_dataset_paths: []          # optional explicit eval split paths (same resolution rule as dataset_paths)
+  dataset_episode_subsets: {}     # optional mapping: dataset_path -> [episode_idx, ...] for train split
+  eval_dataset_episode_subsets: {} # optional mapping: dataset_path -> [episode_idx, ...] for explicit eval split
+  right_target_eval_dataset_paths: [] # optional auxiliary eval split paths (e.g. place_a2b_right target embodiment)
+  right_target_eval_dataset_episode_subsets: {} # optional mapping for auxiliary right-target eval split
+  cross_cycle_datasets: []        # secondary dataset paths (same resolution rule as dataset_paths)
+  seq_len: 49                     # sliding window length (aligned to LVP horizon)
+  batch_size: 4                   # per-GPU micro-batch size
+  eval_num_trajs: 16              # trajectories held out for eval (per dataset total)
+  shift: 1                        # sliding window stride
+  action_dim: 16                  # pad all actions to this dim (0 = no padding)
+  num_workers: 2                  # DataLoader num_workers
+
+# ---- Training ----
+train:
+  steps: 10000                    # total optimizer steps
+  accumulate_grad_batches: 2      # gradient accumulation
+  seed: 0
+  log_every: 10
+  save_checkpoint: true           # whether to write checkpoints at all
+  save_every: 5000
+  eval_every: 1000
+  output_dir: ""                  # auto-generated under <paths.root>/outputs if empty; relative paths resolve against paths.root
+
+# ---- Optimizer ----
+optimizer:
+  lr: 5.0e-5                     # IDM-side (IDM + heads) learning rate
+  lvp_lr: 5.0e-6                 # LVP trainable modules learning rate
+  weight_decay: 1.0e-4
+  clip_grad_norm: 1.0
+
+# ---- Model ----
+model:
+  la_dim: 64                      # latent action dimension
+  lvp_action_source: idm         # "idm" or "gt"
+  idm_input_source: vae_latent   # "vae_latent" or "rgb_patch"; only changes IDM inputs
+  freeze_idm: false              # keep IDM weights frozen and in eval mode during finetuning
+  joint_tune_lvp: true           # jointly fine-tune LVP
+  lvp_train_modules: []          # extra LVP modules to train: [vae, text_encoder, clip]
+  lvp_gradient_checkpointing_rate: 0.0
+  gt_action_head_type: linear    # "linear" or "transformer"
+  gt_action_loss_weight: 0.0     # 0 = disabled
+  use_reparameterized_la: false  # sample latent actions via reparameterization instead of deterministic heads
+  latent_action_kl_weight: 0.0   # KL weight for stochastic latent actions
+
+# ---- EMA ----
+ema:
+  decay: 0.999                   # EMA decay for IDM teacher (0 = disabled)
+
+# ---- Cycle Loss (same-dataset) ----
+cycle:
+  enabled: true
+  weight: 0.01
+  warmup_steps: 200
+  end_steps: 0                  # 0 = never end; >0 disables train cycle loss after this main step
+  burst_every: 0                # 0 = disabled; run cycle-only burst after every N regular steps
+  burst_steps: 0                # number of cycle-only optimizer steps per burst
+
+# ---- Cross-Embodiment Cycle ----
+cross_cycle:
+  train_enabled: true             # compute cross-cycle loss during training
+  eval_enabled: true              # generate cross-cycle eval videos + metrics
+  weight: 0.01
+  warmup_steps: 200
+
+# ---- Gradient Reversal Regularization ----
+grl:
+  enabled: false                  # master switch (even if weight > 0)
+  weight: 0.0
+  alpha: 1.0                     # max gradient reversal scaling
+  warmup_steps: 200              # alpha ramp-up steps
+  hidden_dim: 256                # classifier MLP hidden dim
+
+# ---- Wrong-z Ranking (batch-shuffled latent mismatch) ----
+wrong_z:
+  enabled: false                 # compare correct latent vs another sample's latent on the same start state
+  weight: 1.0                    # lambda in L_rec + lambda * L_wrong-z
+  warmup_steps: 0                # enable wrong-z only after this many optimizer steps
+  sigma_hi: 0.6                  # only enable wrong-z on samples with average future noise <= sigma_hi
+
+# ---- GT-Action Probe ----
+gt_action_probe:
+  enabled: false
+  subset_manifest: null
+  train_steps: 400
+  lr: 1.0e-4
+  weight_decay: 1.0e-4
+  batch_size: 16
+  num_workers: 0
+  seed: 0
+  dim_model: 256
+  n_heads: 4
+  n_layers: 2
+  dim_feedforward: 1024
+  dropout: 0.1
+
+# ---- Eval ----
+eval:
+  generate_video: true
+  video_count: 1
+  video_fps: 20
+
+# ---- Metrics ----
+metrics:
+  video:
+    names: [mse, psnr, ssim, lpips]
+    batch_size: 16
+    max_video_count: 16
+
+# ---- WandB ----
+wandb:
+  enabled: true
+  project: scar-robotwin
+  entity: ""
+  name: ""                        # auto-generated if empty
+  mode: online                    # online, offline, disabled
+
+# ---- IDM Structure (inline, no preset) ----
+idm:
+  env:
+    image_shape:
+    - 128
+    - 128
+  model:
+    idm:
+      patch_size: 16
+      add_action_token: true
+      concatenate_gripper_state: false
+      quantize_la: false
+      net:
+        n_layers: 6
+        dim_model: 256
+        dim_feedforward: 2048
+        n_heads: 4
+        dropout: 0.1
+        pre_norm: false
+        feedforward_activation: gelu
+        pos_enc: learned
+
+# ---- LVP Preset (local, no Hydra) ----
+lvp:
+  preset: config_wan_v2a2v
+  patch: {}
+
+# ---- Resume ----
+resume_from: null                 # path to checkpoint (.pt or directory)

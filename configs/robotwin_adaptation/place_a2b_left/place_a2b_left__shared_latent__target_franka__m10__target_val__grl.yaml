@@ -1,0 +1,23 @@
+_base_: place_a2b_left__shared_latent__target_franka__m10__target_val.yaml
+
+model:
+  use_reparameterized_la: false
+  latent_action_kl_weight: 0.0
+
+grl:
+  enabled: true
+  weight: 0.005
+  alpha: 0.25
+  warmup_steps: 1000
+
+wrong_z:
+  enabled: false
+  weight: 0.0
+
+resume_from: null
+
+train:
+  output_dir: ""
+
+wandb:
+  name: robotwin_place_a2b_left_shared_latent_target_franka_m10_target_val_grl

@@ -1,0 +1,152 @@
+# ============================================================================
+# Auto-generated Robotwin adaptation config
+# source_manifest: data/datasets/robotwin_lmdb/manifests/robotwin_place_a2b_left_randomized_500_adaptation_split_seed0.json
+# method: target_only_gt
+# target_embodiment: ur5
+# target_train_episodes: 10
+# eval_split: target_val
+# train_datasets: 1
+# eval_datasets: 1
+# right_target_eval_datasets: 1
+# ============================================================================
+_base_: ../../robotwin_baseline.yaml
+data:
+  dataset_paths:
+  - data/datasets/robotwin_lmdb/robotwin_place_a2b_left_ur5_randomized_500
+  dataset_episode_subsets:
+    data/datasets/robotwin_lmdb/robotwin_place_a2b_left_ur5_randomized_500:
+    - 78
+    - 323
+    - 81
+    - 312
+    - 41
+    - 386
+    - 463
+    - 262
+    - 479
+    - 349
+  eval_dataset_paths:
+  - data/datasets/robotwin_lmdb/robotwin_place_a2b_left_ur5_randomized_500
+  eval_dataset_episode_subsets:
+    data/datasets/robotwin_lmdb/robotwin_place_a2b_left_ur5_randomized_500:
+    - 265
+    - 410
+    - 405
+    - 295
+    - 310
+    - 138
+    - 359
+    - 418
+    - 284
+    - 241
+    - 9
+    - 237
+    - 342
+    - 17
+    - 319
+    - 53
+    - 15
+    - 238
+    - 433
+    - 399
+    - 379
+    - 328
+    - 419
+    - 114
+    - 426
+    - 208
+    - 297
+    - 65
+    - 210
+    - 103
+    - 176
+    - 148
+    - 374
+    - 79
+    - 416
+    - 239
+    - 424
+    - 348
+    - 243
+    - 438
+    - 29
+    - 362
+    - 196
+    - 152
+    - 397
+    - 219
+    - 102
+    - 288
+    - 311
+    - 11
+  right_target_eval_dataset_paths:
+  - data/datasets/robotwin_lmdb/robotwin_place_a2b_right_ur5_randomized_500
+  right_target_eval_dataset_episode_subsets:
+    data/datasets/robotwin_lmdb/robotwin_place_a2b_right_ur5_randomized_500:
+    - 20
+    - 37
+    - 48
+    - 50
+    - 51
+    - 71
+    - 75
+    - 111
+    - 128
+    - 132
+    - 144
+    - 155
+    - 158
+    - 169
+    - 181
+    - 183
+    - 197
+    - 207
+    - 215
+    - 222
+    - 241
+    - 244
+    - 248
+    - 258
+    - 261
+    - 272
+    - 286
+    - 298
+    - 308
+    - 316
+    - 350
+    - 361
+    - 373
+    - 386
+    - 388
+    - 401
+    - 409
+    - 414
+    - 424
+    - 432
+    - 435
+    - 455
+    - 456
+    - 460
+    - 461
+    - 464
+    - 465
+    - 470
+    - 494
+    - 495
+  cross_cycle_datasets: []
+model:
+  lvp_action_source: gt
+cycle:
+  enabled: false
+cross_cycle:
+  train_enabled: false
+  eval_enabled: false
+grl:
+  enabled: false
+  weight: 0.0
+wrong_z:
+  enabled: false
+gt_action_probe:
+  enabled: false
+wandb:
+  name: robotwin_place_a2b_left_target_only_gt_target_ur5_m10_target_val

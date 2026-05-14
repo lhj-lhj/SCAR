@@ -1,0 +1,26 @@
+data:
+  split_manifest: data/datasets/robotwin_lmdb/manifests/robotwin_place_a2b_left_randomized_500_adaptation_split_seed0.json
+  embodiments: [aloha, arx, franka, ur5]
+  train_episode_key: source_train_episode_indices
+  val_episode_key: val_episode_indices
+  frame_stride: 1
+  max_train_frames_per_class: 0
+  max_val_frames_per_class: 0
+  cache_size: 8
+
+model:
+  channels: [32, 64, 128]
+
+train:
+  output_dir: ""
+  seed: 42
+  device: cuda
+  amp: true
+  epochs: 8
+  batch_size: 128
+  eval_batch_size: 256
+  learning_rate: 1.0e-3
+  weight_decay: 1.0e-4
+  num_workers: 8
+  pin_memory: true
+  print_every: 100

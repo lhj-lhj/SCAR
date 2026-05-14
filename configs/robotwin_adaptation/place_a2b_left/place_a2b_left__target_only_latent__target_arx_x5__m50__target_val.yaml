@@ -1,0 +1,192 @@
+# ============================================================================
+# Auto-generated Robotwin adaptation config
+# source_manifest: data/datasets/robotwin_lmdb/manifests/robotwin_place_a2b_left_randomized_500_adaptation_split_seed0.json
+# method: target_only_latent
+# target_embodiment: arx-x5
+# target_train_episodes: 50
+# eval_split: target_val
+# train_datasets: 1
+# eval_datasets: 1
+# right_target_eval_datasets: 1
+# ============================================================================
+_base_: ../../robotwin_baseline.yaml
+data:
+  dataset_paths:
+  - data/datasets/robotwin_lmdb/robotwin_place_a2b_left_arx_x5_randomized_500
+  dataset_episode_subsets:
+    data/datasets/robotwin_lmdb/robotwin_place_a2b_left_arx_x5_randomized_500:
+    - 239
+    - 264
+    - 25
+    - 189
+    - 487
+    - 181
+    - 48
+    - 245
+    - 76
+    - 349
+    - 273
+    - 315
+    - 436
+    - 356
+    - 127
+    - 20
+    - 131
+    - 159
+    - 321
+    - 135
+    - 289
+    - 90
+    - 444
+    - 251
+    - 313
+    - 205
+    - 448
+    - 195
+    - 215
+    - 381
+    - 226
+    - 326
+    - 158
+    - 463
+    - 396
+    - 42
+    - 68
+    - 337
+    - 106
+    - 359
+    - 28
+    - 183
+    - 456
+    - 402
+    - 285
+    - 236
+    - 495
+    - 38
+    - 23
+    - 74
+  eval_dataset_paths:
+  - data/datasets/robotwin_lmdb/robotwin_place_a2b_left_arx_x5_randomized_500
+  eval_dataset_episode_subsets:
+    data/datasets/robotwin_lmdb/robotwin_place_a2b_left_arx_x5_randomized_500:
+    - 393
+    - 54
+    - 124
+    - 77
+    - 493
+    - 446
+    - 343
+    - 298
+    - 240
+    - 222
+    - 22
+    - 378
+    - 261
+    - 358
+    - 408
+    - 95
+    - 263
+    - 416
+    - 268
+    - 67
+    - 323
+    - 24
+    - 489
+    - 424
+    - 345
+    - 91
+    - 82
+    - 37
+    - 421
+    - 453
+    - 368
+    - 354
+    - 27
+    - 225
+    - 286
+    - 476
+    - 438
+    - 204
+    - 154
+    - 458
+    - 201
+    - 88
+    - 116
+    - 386
+    - 182
+    - 238
+    - 59
+    - 384
+    - 147
+    - 43
+  right_target_eval_dataset_paths:
+  - data/datasets/robotwin_lmdb/robotwin_place_a2b_right_arx_x5_randomized_500
+  right_target_eval_dataset_episode_subsets:
+    data/datasets/robotwin_lmdb/robotwin_place_a2b_right_arx_x5_randomized_500:
+    - 20
+    - 37
+    - 48
+    - 50
+    - 51
+    - 71
+    - 75
+    - 111
+    - 128
+    - 132
+    - 144
+    - 155
+    - 158
+    - 169
+    - 181
+    - 183
+    - 197
+    - 207
+    - 215
+    - 222
+    - 241
+    - 244
+    - 248
+    - 258
+    - 261
+    - 272
+    - 286
+    - 298
+    - 308
+    - 316
+    - 350
+    - 361
+    - 373
+    - 386
+    - 388
+    - 401
+    - 409
+    - 414
+    - 424
+    - 432
+    - 435
+    - 455
+    - 456
+    - 460
+    - 461
+    - 464
+    - 465
+    - 470
+    - 494
+    - 495
+  cross_cycle_datasets: []
+model:
+  lvp_action_source: idm
+cycle:
+  enabled: false
+cross_cycle:
+  train_enabled: false
+  eval_enabled: false
+grl:
+  enabled: false
+  weight: 0.0
+wrong_z:
+  enabled: false
+gt_action_probe:
+  enabled: false
+wandb:
+  name: robotwin_place_a2b_left_target_only_latent_target_arx_x5_m50_target_val

@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scar-action-representations"
+version = "0.1.0"
+description = "SCAR: Self-Supervised Continuous Action Representation Learning"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "einops",
+  "numpy",
+  "omegaconf",
+  "opencv-python",
+  "pillow",
+  "pyyaml",
+  "torch",
+  "transformers",
+]
+
+[project.optional-dependencies]
+data = ["h5py", "lmdb", "tensorflow"]
+logging = ["wandb"]
+metrics = ["lpips"]
+
+[tool.setuptools]
+packages = ["scar"]

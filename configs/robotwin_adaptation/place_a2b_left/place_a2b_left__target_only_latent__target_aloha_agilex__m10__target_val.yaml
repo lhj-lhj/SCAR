@@ -1,0 +1,152 @@
+# ============================================================================
+# Auto-generated Robotwin adaptation config
+# source_manifest: data/datasets/robotwin_lmdb/manifests/robotwin_place_a2b_left_randomized_500_adaptation_split_seed0.json
+# method: target_only_latent
+# target_embodiment: aloha-agilex
+# target_train_episodes: 10
+# eval_split: target_val
+# train_datasets: 1
+# eval_datasets: 1
+# right_target_eval_datasets: 1
+# ============================================================================
+_base_: ../../robotwin_baseline.yaml
+data:
+  dataset_paths:
+  - data/datasets/robotwin_lmdb/robotwin_place_a2b_left_aloha_agilex_randomized_500
+  dataset_episode_subsets:
+    data/datasets/robotwin_lmdb/robotwin_place_a2b_left_aloha_agilex_randomized_500:
+    - 47
+    - 469
+    - 11
+    - 96
+    - 290
+    - 490
+    - 158
+    - 419
+    - 26
+    - 341
+  eval_dataset_paths:
+  - data/datasets/robotwin_lmdb/robotwin_place_a2b_left_aloha_agilex_randomized_500
+  eval_dataset_episode_subsets:
+    data/datasets/robotwin_lmdb/robotwin_place_a2b_left_aloha_agilex_randomized_500:
+    - 426
+    - 300
+    - 166
+    - 430
+    - 136
+    - 269
+    - 24
+    - 477
+    - 311
+    - 400
+    - 74
+    - 488
+    - 219
+    - 65
+    - 70
+    - 190
+    - 297
+    - 398
+    - 143
+    - 374
+    - 7
+    - 382
+    - 358
+    - 67
+    - 147
+    - 20
+    - 196
+    - 240
+    - 93
+    - 424
+    - 316
+    - 459
+    - 365
+    - 468
+    - 256
+    - 250
+    - 429
+    - 323
+    - 243
+    - 346
+    - 258
+    - 169
+    - 53
+    - 355
+    - 393
+    - 140
+    - 239
+    - 313
+    - 392
+    - 134
+  right_target_eval_dataset_paths:
+  - data/datasets/robotwin_lmdb/robotwin_place_a2b_right_aloha_agilex_randomized_500
+  right_target_eval_dataset_episode_subsets:
+    data/datasets/robotwin_lmdb/robotwin_place_a2b_right_aloha_agilex_randomized_500:
+    - 20
+    - 37
+    - 48
+    - 50
+    - 51
+    - 71
+    - 75
+    - 111
+    - 128
+    - 132
+    - 144
+    - 155
+    - 158
+    - 169
+    - 181
+    - 183
+    - 197
+    - 207
+    - 215
+    - 222
+    - 241
+    - 244
+    - 248
+    - 258
+    - 261
+    - 272
+    - 286
+    - 298
+    - 308
+    - 316
+    - 350
+    - 361
+    - 373
+    - 386
+    - 388
+    - 401
+    - 409
+    - 414
+    - 424
+    - 432
+    - 435
+    - 455
+    - 456
+    - 460
+    - 461
+    - 464
+    - 465
+    - 470
+    - 494
+    - 495
+  cross_cycle_datasets: []
+model:
+  lvp_action_source: idm
+cycle:
+  enabled: false
+cross_cycle:
+  train_enabled: false
+  eval_enabled: false
+grl:
+  enabled: false
+  weight: 0.0
+wrong_z:
+  enabled: false
+gt_action_probe:
+  enabled: false
+wandb:
+  name: robotwin_place_a2b_left_target_only_latent_target_aloha_agilex_m10_target_val
